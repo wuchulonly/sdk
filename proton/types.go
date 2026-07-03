@@ -12,9 +12,9 @@ import (
 // ========================================
 
 type (
-	Finding    = types.ProtonResult
-	MatchEvent = types.ProtonMatchEvent
-	ScanStats  = types.ProtonScanStats
+	Finding   = types.ProtonResult
+	Event     = types.ProtonEvent
+	ScanStats = types.ProtonScanStats
 	Rule       = types.ProtonRule
 )
 

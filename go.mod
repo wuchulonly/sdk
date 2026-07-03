@@ -3,16 +3,16 @@ module github.com/chainreactors/sdk
 go 1.25.4
 
 require (
-	github.com/chainreactors/fingers v1.2.2-0.20260629060048-25d52909ff9b
-	github.com/chainreactors/gogo/v2 v2.14.2-0.20260629062248-238b8dcab915
+	github.com/chainreactors/fingers v1.2.2-0.20260703124922-b8ac7e00cf68
+	github.com/chainreactors/gogo/v2 v2.14.2-0.20260703125313-774bd79ac36e
 	github.com/chainreactors/logs v0.0.0-20260624034259-9aaea4aa52cc
-	github.com/chainreactors/neutron v0.1.1-0.20260629055246-979be130dcaa
-	github.com/chainreactors/neutron/operators/full v0.1.0
-	github.com/chainreactors/proton v0.3.1-0.20260629055539-f6509337ef42
+	github.com/chainreactors/neutron v0.1.1-0.20260703124839-c4091ad1e02d
+	github.com/chainreactors/neutron/operators/full v0.1.1-0.20260703124839-c4091ad1e02d
+	github.com/chainreactors/proton v0.3.3-0.20260703125000-97bdff4bcf27
 	github.com/chainreactors/proxyclient v1.1.1-0.20260529172347-2a80e08d5593
-	github.com/chainreactors/spray v1.3.3-0.20260629055610-b618acf15bb6
+	github.com/chainreactors/spray v1.3.3-0.20260703125243-3bbfb5d1983a
 	github.com/chainreactors/utils v0.0.0-20260629054935-23a3e0a235f9
-	github.com/chainreactors/utils/parsers v0.0.0-20260629054935-23a3e0a235f9
+	github.com/chainreactors/utils/parsers v0.0.0-20260703124640-175b2abe30c2
 	github.com/chainreactors/zombie v1.3.0
 	github.com/panjf2000/ants/v2 v2.12.1
 	gopkg.in/yaml.v3 v3.0.1

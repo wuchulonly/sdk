@@ -22,14 +22,11 @@ func (r *ExecuteResult) VulnResult(target string) *types.VulnResult {
 	}
 	if data := r.data; data != nil {
 		if op := data.Result; op != nil {
-			vr.Matches = op.Matches
-			vr.Extracts = op.Extracts
-			vr.OutputExtracts = op.OutputExtracts
+			vr.Events = op.Events
 			vr.Request = op.Request
 			vr.Response = op.Response
 			vr.PayloadValues = op.PayloadValues
 		}
-		vr.Events = data.Events
 	}
 	return vr
 }

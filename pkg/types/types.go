@@ -242,9 +242,9 @@ var (
 // ====================
 
 type (
-	ProtonResult     = protonFile.Finding
-	ProtonMatchEvent = protonFile.MatchEvent
-	ProtonScanStats  = protonFile.ScanStats
+	ProtonResult    = protonFile.Finding
+	ProtonEvent     = protonFile.Event
+	ProtonScanStats = protonFile.ScanStats
 	ProtonRule       = protonFile.Rule
 )
 

@@ -64,13 +64,8 @@ func main() {
 			sev = "unknown"
 		}
 		fmt.Printf("[%s] %s (%s) %s\n", sev, f.TemplateID, f.TemplateName, f.FilePath)
-		for name, events := range f.Matches {
-			for _, e := range events {
-				fmt.Printf("  match [%s] line %d: %s\n", name, e.Line, e.Value)
-			}
-		}
-		for _, e := range f.Extracts {
-			fmt.Printf("  extract line %d: %s\n", e.Line, e.Value)
+		for _, e := range f.Events {
+			fmt.Printf("  [%s:%s] line %d: %s\n", e.Type, e.Name, e.Line, e.Value)
 		}
 	}
 

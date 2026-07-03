@@ -96,9 +96,9 @@ func main() {
 			}
 		}
 
-		if len(result.Extracts) > 0 {
+		if extracts := result.ExtractsByName(); len(extracts) > 0 {
 			fmt.Printf("\n--- Extracts ---\n")
-			for name, values := range result.Extracts {
+			for name, values := range extracts {
 				fmt.Printf("  %s: %s\n", name, strings.Join(values, ", "))
 			}
 		}
