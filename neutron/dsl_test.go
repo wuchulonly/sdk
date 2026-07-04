@@ -83,7 +83,7 @@ http:
 	if result == nil || !result.Matched {
 		t.Fatal("expected DSL matcher to match status_code == 200")
 	}
-	if len(result.OutputExtracts) == 0 {
+	if len(result.OutputExtracts()) == 0 {
 		t.Fatalf("expected DSL extractor to produce output extracts, got none")
 	}
 }

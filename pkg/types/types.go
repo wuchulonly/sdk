@@ -15,6 +15,7 @@ import (
 	templateNetwork "github.com/chainreactors/neutron/protocols/network"
 	templateSSL "github.com/chainreactors/neutron/protocols/ssl"
 	"github.com/chainreactors/neutron/templates"
+	"github.com/chainreactors/utils/httputils"
 	"github.com/chainreactors/utils/parsers"
 	protonFile "github.com/chainreactors/proton/proton/file"
 	zombiecore "github.com/chainreactors/zombie/core"
@@ -71,9 +72,9 @@ type (
 	Extracteds    = parsers.Extracteds
 	Extractor     = parsers.Extractor
 	Extractors    = parsers.Extractors
-	Response      = parsers.Response
-	Content       = parsers.Content
-	Hashes        = parsers.Hashes
+	Response      = httputils.Response
+	Content       = httputils.Content
+	Hashes        = httputils.Hashes
 )
 
 const (

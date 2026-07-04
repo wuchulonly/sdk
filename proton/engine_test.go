@@ -228,11 +228,11 @@ func TestEngine_LoadFromTemplateData(t *testing.T) {
 
 	for _, f := range findings {
 		if f.TemplateID == "array-regex" {
-			if f.Result == nil || len(f.Result.OutputExtracts) == 0 {
+			if len(f.Result.OutputExtracts()) == 0 {
 				t.Fatal("expected extracted values for array-regex")
 			}
-			if f.Result.OutputExtracts[0] != "my_secret_key_999" {
-				t.Fatalf("unexpected extract: %s", f.Result.OutputExtracts[0])
+			if f.Result.OutputExtracts()[0] != "my_secret_key_999" {
+				t.Fatalf("unexpected extract: %s", f.Result.OutputExtracts()[0])
 			}
 		}
 	}
@@ -295,17 +295,17 @@ func TestEngine_AWSKeyDetection(t *testing.T) {
 	if f.Severity != "critical" {
 		t.Fatalf("unexpected severity: %s", f.Severity)
 	}
-	if f.Result == nil || len(f.Result.OutputExtracts) == 0 {
+	if len(f.Result.OutputExtracts()) == 0 {
 		t.Fatal("expected extracted AWS key")
 	}
 	found := false
-	for _, v := range f.Result.OutputExtracts {
+	for _, v := range f.Result.OutputExtracts() {
 		if v == "AKIAIOSFODNN7EXAMPLE" {
 			found = true
 		}
 	}
 	if !found {
-		t.Fatalf("expected AKIAIOSFODNN7EXAMPLE in extracts, got: %v", f.Result.OutputExtracts)
+		t.Fatalf("expected AKIAIOSFODNN7EXAMPLE in extracts, got: %v", f.Result.OutputExtracts())
 	}
 }
 
@@ -506,8 +506,8 @@ func TestEngine_NewLineWriter(t *testing.T) {
 	if len(findings) != 1 {
 		t.Fatalf("expected 1 finding, got %d", len(findings))
 	}
-	if findings[0].Result.OutputExtracts[0] != "s3cret" {
-		t.Fatalf("unexpected extract: %s", findings[0].Result.OutputExtracts[0])
+	if findings[0].Result.OutputExtracts()[0] != "s3cret" {
+		t.Fatalf("unexpected extract: %s", findings[0].Result.OutputExtracts()[0])
 	}
 }
 

@@ -194,20 +194,20 @@ http:
 		t.Fatal("expected json extractor template to match")
 	}
 	found := false
-	for _, vals := range result.Extracts {
+	for _, vals := range result.ExtractsByName() {
 		for _, v := range vals {
 			if v == "1.2.3" {
 				found = true
 			}
 		}
 	}
-	for _, v := range result.OutputExtracts {
+	for _, v := range result.OutputExtracts() {
 		if v == "1.2.3" {
 			found = true
 		}
 	}
 	if !found {
-		t.Fatalf("expected json extractor to extract '1.2.3', got extracts=%v output=%v", result.Extracts, result.OutputExtracts)
+		t.Fatalf("expected json extractor to extract '1.2.3', got extracts=%v output=%v", result.ExtractsByName(), result.OutputExtracts())
 	}
 }
 
@@ -285,20 +285,20 @@ http:
 		t.Fatal("expected xpath extractor template to match")
 	}
 	found := false
-	for _, vals := range result.Extracts {
+	for _, vals := range result.ExtractsByName() {
 		for _, v := range vals {
 			if v == "TestPage" {
 				found = true
 			}
 		}
 	}
-	for _, v := range result.OutputExtracts {
+	for _, v := range result.OutputExtracts() {
 		if v == "TestPage" {
 			found = true
 		}
 	}
 	if !found {
-		t.Fatalf("expected xpath extractor to extract 'TestPage', got extracts=%v output=%v", result.Extracts, result.OutputExtracts)
+		t.Fatalf("expected xpath extractor to extract 'TestPage', got extracts=%v output=%v", result.ExtractsByName(), result.OutputExtracts())
 	}
 }
 

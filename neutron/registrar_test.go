@@ -28,7 +28,7 @@ func TestRegisterCustomMatcherType(t *testing.T) {
 	called := false
 
 	operators.RegisterMatcherType("test-custom-match", testMatchType, nil,
-		func(m *operators.Matcher, corpus string, data map[string]interface{}) (bool, []string) {
+		func(m *operators.Matcher, corpus string, data map[string]interface{}) (bool, []operators.MatchHit) {
 			called = true
 			return true, nil
 		},
