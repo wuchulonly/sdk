@@ -114,7 +114,7 @@ func (e *Engine) ScanData(data []byte, label string) []Finding {
 	}
 	var findings []Finding
 	for _, group := range e.scanner.Groups {
-		findings = append(findings, e.scanner.ScanData(data, label, group)...)
+		findings = append(findings, e.scanner.FindAll(data, label, group)...)
 	}
 	return findings
 }
@@ -131,7 +131,7 @@ func (e *Engine) ScanBlock(data []byte, label string) []Finding {
 	}
 	var findings []Finding
 	for _, group := range e.scanner.Groups {
-		findings = append(findings, e.scanner.ScanBlock(data, label, group)...)
+		findings = append(findings, e.scanner.FindAll(data, label, group, file.WithBlockScan())...)
 	}
 	return findings
 }
@@ -166,7 +166,7 @@ func (e *Engine) executeScanData(ctx *Context, task *ScanDataTask) (<-chan types
 
 		var findingCount int64
 		for _, group := range e.scanner.Groups {
-			findings := e.scanner.ScanData(task.Data, task.Label, group)
+			findings := e.scanner.FindAll(task.Data, task.Label, group)
 			for i := range findings {
 				findingCount++
 				select {
