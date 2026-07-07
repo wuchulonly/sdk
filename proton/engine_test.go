@@ -457,7 +457,10 @@ func TestEngine_ConfigFilter_IDs(t *testing.T) {
 	})
 
 	eng := mustEngine(t, NewConfig().WithTemplatePaths(tmplDir).WithIDs("password-extract"))
-	findings := eng.ScanData([]byte("PRIVATE KEY\npassword = test\n"), "all.txt")
+	// The file extractor drops dummy values like "test"; use a realistic value so
+	// only the ID filter (not the FP filter) decides the outcome. "PRIVATE KEY" stays
+	// in the input to assert the excluded private-key-detect rule does not fire.
+	findings := eng.ScanData([]byte("PRIVATE KEY\npassword = test123\n"), "all.txt")
 	if len(findings) != 1 {
 		t.Fatalf("expected 1 finding, got %d", len(findings))
 	}

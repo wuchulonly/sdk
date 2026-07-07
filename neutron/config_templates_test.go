@@ -67,10 +67,14 @@ func TestExecuteTaskAndResultHelpers(t *testing.T) {
 		t.Fatal("expected explicit empty templates to fail validation")
 	}
 
+	// OperatorResult (parsers.NeutronResult) embeds parsers.Result, so Matched is
+	// a promoted field and can't be set in a composite literal — assign it directly.
+	matchedResult := &types.OperatorResult{}
+	matchedResult.Matched = true
 	matched := &ExecuteResult{
 		success:  true,
 		template: &types.Template{Id: "demo"},
-		data:     &NeutronResult{Result: &types.OperatorResult{Matched: true}},
+		data:     &NeutronResult{Result: matchedResult},
 	}
 	if !matched.Success() || !matched.Matched() || matched.Template().Id != "demo" || matched.Data() != matched.Result() {
 		t.Fatalf("unexpected matched result helpers: %+v", matched)
