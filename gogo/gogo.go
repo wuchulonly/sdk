@@ -11,6 +11,7 @@ import (
 	"github.com/chainreactors/gogo/v2/engine"
 	"github.com/chainreactors/gogo/v2/pkg"
 	"github.com/chainreactors/logs"
+	neutrontemplates "github.com/chainreactors/neutron/templates"
 	sdkfingers "github.com/chainreactors/sdk/fingers"
 	"github.com/chainreactors/sdk/neutron"
 	"github.com/chainreactors/sdk/pkg/types"
@@ -82,6 +83,23 @@ func buildTemplateMap(templates []*types.Template) map[string][]*types.Template 
 	}
 
 	return templateMap
+}
+
+// buildChainExecutor 构建 gogo 漏洞扫描所需的 chain 执行器。
+//
+// gogo 的 engine.NeutronScan 依赖包级全局 pkg.ChainExec 来解析模板链，而该全局
+// 原本只由 pkg.LoadTemplates 赋值。SDK 注入模板时走的是 buildTemplateMap 直接填
+// pkg.TemplateMap 的旁路，绕过了 LoadTemplates，因此必须在这里同步构建 ChainExec，
+// 否则开启 exploit 扫描（Exploit != "none"）时 ChainExec.Execute 会打在 nil 上导致
+// ants worker panic。语义与 pkg.LoadTemplates 中的 chainExec 构建保持一致。
+func buildChainExecutor(templates []*types.Template) *neutrontemplates.ChainExecutor {
+	chainExec := neutrontemplates.NewChainExecutor(neutrontemplates.ChainConfig{})
+	for _, template := range templates {
+		if template.Id != "" {
+			chainExec.Add(template.Id, template.Chains)
+		}
+	}
+	return chainExec
 }
 
 // Init 初始化引擎（加载指纹库等）
@@ -166,6 +184,7 @@ func (e *Engine) applyInjectedNeutron() bool {
 	}
 	templateMap := buildTemplateMap(templates)
 	pkg.TemplateMap = templateMap
+	pkg.ChainExec = buildChainExecutor(templates)
 	templateCount := 0
 	for _, values := range templateMap {
 		templateCount += len(values)
